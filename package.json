@@ -4,7 +4,7 @@
   "description": "Um projeto de código aberto para gerar expressões regulares (Regex) validadas a partir de critérios selecionados pelo usuário. Ideal para desenvolvedores que precisam de regex para validação de formulários, processamento de texto e muito mais.",
   "main": "src/controller/appController.js",
   "scripts": {
-    "start": "open index.html",
+    "start": "http-server .",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
@@ -16,6 +16,8 @@
     "hacktoberfest"
   ],
   "author": "Manus AI",
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "http-server": "^14.1.1"
+  }
 }
-

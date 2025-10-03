@@ -28,8 +28,27 @@ Para rodar este projeto em sua máquina local, siga os passos abaixo:
     cd regex-generator
     ```
 
-2.  **Abra o `index.html`:**
-    Este é um projeto Vanilla JavaScript, HTML e CSS. Você pode simplesmente abrir o arquivo `index.html` em seu navegador web preferido. Não é necessário um servidor web para começar, mas para desenvolvimento local com hot-reloading ou outras ferramentas, você pode usar extensões de navegador como 'Live Server' para VS Code.
+2.  **Instale as dependências:**
+    Esse é um projeto Vanilla JavaScript, HTML e CSS. Ele usa um servidor simples com o pacote `http-server`, então é necessário instalar o pacote com um gerenciador de pacotes NodeJS (npm, yarn ou pnpm).
+
+    ```bash
+    npm i
+    ```
+
+    Ou 
+
+    ```bash
+    yarn
+    ```
+
+    Ou 
+
+    ```bash
+    pnpm i
+    ```
+    
+3. **Inicio o projeto**:
+    Após a instalação, inicie o projeto com o script `start` e o servidor irá iniciar em [http://localhost:8080](http://localhost:8080).
 
 ## 🚀 Como Usar
 
@@ -97,8 +116,43 @@ To run this project on your local machine, follow the steps below:
     cd regex-generator
     ```
 
-2.  **Open `index.html`:**
-    This is a Vanilla JavaScript, HTML and CSS project. You can simply open the `index.html` file in your preferred web browser. No web server is needed to get started, but for local development with hot-reloading or other tools, you can use browser extensions like 'Live Server' for VS Code.
+2. **Install dependencies:**
+   This is a Vanilla JavaScript, HTML and CSS project. It uses a simple server with the `http-server` package, so you need to install the package with a NodeJS package manager (npm, yarn or pnpm).
+
+   ```bash
+   npm i
+   ```
+
+   Or 
+
+   ```bash
+   yarn
+   ```
+
+   Or 
+
+   ```bash
+   pnpm i
+   ```
+   
+3. **Start the project:**
+   After installation, start the project with the `start` script and the server will start at [http://localhost:8080](http://localhost:8080).
+
+   ```bash
+   npm start
+   ```
+
+   Or 
+
+   ```bash
+   yarn start
+   ```
+
+   Or 
+
+   ```bash
+   pnpm start
+   ```
 
 ## 🚀 How to Use
 
