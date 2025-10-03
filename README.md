@@ -1,4 +1,7 @@
-# Gerador de Regex por Critérios
+
+<img width="1024" height="455" alt="image" src="https://github.com/user-attachments/assets/4a60cf00-6b12-4c97-875b-04d079bc9dc4" />
+
+# Gerador de Regex
 
 Um projeto de código aberto para gerar expressões regulares (Regex) validadas a partir de critérios selecionados pelo usuário. Ideal para desenvolvedores que precisam de regex para validação de formulários, processamento de texto e muito mais.
 
