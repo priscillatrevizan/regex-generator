@@ -40,7 +40,9 @@ O sistema de toasts irá guiá-lo através de cada etapa com feedback em tempo r
 
 ## Como Contribuir
 
-Este projeto acolhe contribuições de todos! Seja para adicionar novos padrões de regex, melhorar a interface do usuário, corrigir bugs ou aprimorar a documentação. Por favor, leia o arquivo `CONTRIBUTING.md` para diretrizes detalhadas sobre como contribuir.
+Este projeto acolhe contribuições de todos! Seja para adicionar novos padrões de regex, melhorar a interface do usuário, corrigir bugs ou aprimorar a documentação. Por favor, leia o arquivo [`CONTRIBUTING.md`](https://github.com/priscillatrevizan/regex-generator/blob/main/CONTRIBUTING.md) para diretrizes detalhadas sobre como contribuir.
+
+Atente-se tambem às regras em [`CÓDIGO DE CONDUTA`](https://github.com/priscillatrevizan/regex-generator/blob/main/CODE_OF_CONDUCT.md)
 
 **Foco principal para contribuições:** Adicionar novas funções e padrões de Regex validados ao arquivo `src/model/regexPatterns.js`.
 
@@ -125,8 +127,9 @@ This project officially participates in **Hacktoberfest**!
 ### **How to Participate:**
 1. Look for issues with `hacktoberfest` or `good-first-issue` labels
 2. Comment on the issue to be assigned
-3. Follow the guide in `CONTRIBUTING.md`
-4. Open a quality Pull Request
+3. Follow the guide in [`CONTRIBUTING.md`](https://github.com/priscillatrevizan/regex-generator/blob/main/CONTRIBUTING.md)
+4 Please also pay attention to the rules in [`CODE OF CONDUCT`](https://github.com/priscillatrevizan/regex-generator/blob/main/CODE_OF_CONDUCT.md)
+5. Open a quality Pull Request
 
 **All valid contributions will be accepted!** 🚀
 
