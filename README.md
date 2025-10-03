@@ -1,4 +1,7 @@
-# Gerador de Regex por Critérios
+
+<img width="1024" height="455" alt="image" src="https://github.com/user-attachments/assets/4a60cf00-6b12-4c97-875b-04d079bc9dc4" />
+
+# Gerador de Regex
 
 Um projeto de código aberto para gerar expressões regulares (Regex) validadas a partir de critérios selecionados pelo usuário. Ideal para desenvolvedores que precisam de regex para validação de formulários, processamento de texto e muito mais.
 
@@ -25,8 +28,27 @@ Para rodar este projeto em sua máquina local, siga os passos abaixo:
     cd regex-generator
     ```
 
-2.  **Abra o `index.html`:**
-    Este é um projeto Vanilla JavaScript, HTML e CSS. Você pode simplesmente abrir o arquivo `index.html` em seu navegador web preferido. Não é necessário um servidor web para começar, mas para desenvolvimento local com hot-reloading ou outras ferramentas, você pode usar extensões de navegador como 'Live Server' para VS Code.
+2.  **Instale as dependências:**
+    Esse é um projeto Vanilla JavaScript, HTML e CSS. Ele usa um servidor simples com o pacote `http-server`, então é necessário instalar o pacote com um gerenciador de pacotes NodeJS (npm, yarn ou pnpm).
+
+    ```bash
+    npm i
+    ```
+
+    Ou 
+
+    ```bash
+    yarn
+    ```
+
+    Ou 
+
+    ```bash
+    pnpm i
+    ```
+    
+3. **Inicio o projeto**:
+    Após a instalação, inicie o projeto com o script `start` e o servidor irá iniciar em [http://localhost:8080](http://localhost:8080).
 
 ## 🚀 Como Usar
 
@@ -40,7 +62,9 @@ O sistema de toasts irá guiá-lo através de cada etapa com feedback em tempo r
 
 ## Como Contribuir
 
-Este projeto acolhe contribuições de todos! Seja para adicionar novos padrões de regex, melhorar a interface do usuário, corrigir bugs ou aprimorar a documentação. Por favor, leia o arquivo `CONTRIBUTING.md` para diretrizes detalhadas sobre como contribuir.
+Este projeto acolhe contribuições de todos! Seja para adicionar novos padrões de regex, melhorar a interface do usuário, corrigir bugs ou aprimorar a documentação. Por favor, leia o arquivo [`CONTRIBUTING.md`](https://github.com/priscillatrevizan/regex-generator/blob/main/CONTRIBUTING.md) para diretrizes detalhadas sobre como contribuir.
+
+Atente-se tambem às regras em [`CÓDIGO DE CONDUTA`](https://github.com/priscillatrevizan/regex-generator/blob/main/CODE_OF_CONDUCT.md)
 
 **Foco principal para contribuições:** Adicionar novas funções e padrões de Regex validados ao arquivo `src/model/regexPatterns.js`.
 
@@ -92,8 +116,43 @@ To run this project on your local machine, follow the steps below:
     cd regex-generator
     ```
 
-2.  **Open `index.html`:**
-    This is a Vanilla JavaScript, HTML and CSS project. You can simply open the `index.html` file in your preferred web browser. No web server is needed to get started, but for local development with hot-reloading or other tools, you can use browser extensions like 'Live Server' for VS Code.
+2. **Install dependencies:**
+   This is a Vanilla JavaScript, HTML and CSS project. It uses a simple server with the `http-server` package, so you need to install the package with a NodeJS package manager (npm, yarn or pnpm).
+
+   ```bash
+   npm i
+   ```
+
+   Or 
+
+   ```bash
+   yarn
+   ```
+
+   Or 
+
+   ```bash
+   pnpm i
+   ```
+   
+3. **Start the project:**
+   After installation, start the project with the `start` script and the server will start at [http://localhost:8080](http://localhost:8080).
+
+   ```bash
+   npm start
+   ```
+
+   Or 
+
+   ```bash
+   yarn start
+   ```
+
+   Or 
+
+   ```bash
+   pnpm start
+   ```
 
 ## 🚀 How to Use
 
@@ -125,8 +184,9 @@ This project officially participates in **Hacktoberfest**!
 ### **How to Participate:**
 1. Look for issues with `hacktoberfest` or `good-first-issue` labels
 2. Comment on the issue to be assigned
-3. Follow the guide in `CONTRIBUTING.md`
-4. Open a quality Pull Request
+3. Follow the guide in [`CONTRIBUTING.md`](https://github.com/priscillatrevizan/regex-generator/blob/main/CONTRIBUTING.md)
+4. Please also pay attention to the rules in [`CODE OF CONDUCT`](https://github.com/priscillatrevizan/regex-generator/blob/main/CODE_OF_CONDUCT.md)
+5. Open a quality Pull Request
 
 **All valid contributions will be accepted!** 🚀
 
