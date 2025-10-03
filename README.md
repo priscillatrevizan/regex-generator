@@ -128,7 +128,7 @@ This project officially participates in **Hacktoberfest**!
 1. Look for issues with `hacktoberfest` or `good-first-issue` labels
 2. Comment on the issue to be assigned
 3. Follow the guide in [`CONTRIBUTING.md`](https://github.com/priscillatrevizan/regex-generator/blob/main/CONTRIBUTING.md)
-4 Please also pay attention to the rules in [`CODE OF CONDUCT`](https://github.com/priscillatrevizan/regex-generator/blob/main/CODE_OF_CONDUCT.md)
+4. Please also pay attention to the rules in [`CODE OF CONDUCT`](https://github.com/priscillatrevizan/regex-generator/blob/main/CODE_OF_CONDUCT.md)
 5. Open a quality Pull Request
 
 **All valid contributions will be accepted!** 🚀
