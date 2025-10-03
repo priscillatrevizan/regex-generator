@@ -21,14 +21,8 @@ Para participar do Hacktoberfest, este repositório deve ter:
 - 🔴 `bug` - Correção de bugs
 - 📝 `documentation` - Melhorias na documentação
 
-### **Como Configurar o Repositório:**
-
-1. **Adicione as topics no GitHub:**
-   - Vá em Settings → General → Topics
-   - Adicione: `hacktoberfest`, `regex`, `javascript`, `open-source`, `good-first-issue`
-
-2. **Crie Issues com labels apropriadas**
-3. **Mantenha discussões ativas e acolhedoras**
+## ✨ **Estrele esse repositório:**
+<img width="155" height="34" alt="image" src="https://github.com/user-attachments/assets/827caeba-0963-49e7-9da7-c7c11fe03bd6" />
 
 ## Como Contribuir
 
