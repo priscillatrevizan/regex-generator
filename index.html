@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerador de Regex | Hacktoberfest</title>
+    <link rel="stylesheet" href="src/styles/main.css">
+    <link rel="stylesheet" href="src/styles/components/generator.css">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1>Gerador de Regex por Critérios</h1>
+            <p>Escolha o tipo de validação e personalize os critérios para obter seu padrão de Expressão Regular válido.</p>
+        </header>
+
+        <main class="generator-app">
+            
+            <section class="generator-controls">
+                <h2>1. Escolha a Categoria</h2>
+                <div id="category-selector" class="category-selector">
+                    </div>
+                
+                <h2>2. Defina os Critérios</h2>
+                <div id="criteria-options" class="criteria-options">
+                    <p class="placeholder-text">Selecione uma categoria acima para ver os critérios.</p>
+                </div>
+
+                <h2>3. Gere a Regex</h2>
+                <button id="generate-button" class="btn primary-btn" disabled>
+                    Gerar Regex
+                </button>
+            </section>
+
+            <section class="generator-result">
+                <h2>4. Resultado e Teste</h2>
+                
+                <div class="result-box">
+                    <label for="regex-output">Padrão Regex:</label>
+                    <textarea id="regex-output" rows="2" readonly placeholder="/.../flags"></textarea>
+                    
+                    <label for="js-code-output">Código JavaScript (para uso):</label>
+                    <textarea id="js-code-output" rows="4" readonly placeholder="const regex = new RegExp('padrao', 'flags');"></textarea>
+                    
+                    <div class="button-group">
+                        <button id="copy-regex-button" class="btn secondary-btn" disabled>Copiar Regex</button>
+                        <button id="copy-js-button" class="btn secondary-btn" disabled>Copiar Código JS</button>
+                    </div>
+                </div>
+                
+                <div class="test-viewer">
+                    <h3>5. Teste Rápido</h3>
+                    <label for="test-input">Conteúdo a Validar (Texto de Teste):</label>
+                    <textarea id="test-input" rows="3" placeholder="Insira o texto onde o regex deve ser testado..."></textarea>
+                    
+                    <button id="test-button" class="btn tertiary-btn" disabled>Testar Regex</button>
+
+                    <label for="test-result">Resultado:</label>
+                    <div id="test-result" class="test-result-output">
+                        Aguardando teste...
+                    </div>
+                </div>
+            </section>
+        </main>
+            </section>
+        </main>
+        
+        <footer class="footer">
+            <p>Um projeto open source amigável para o <a href="https://hacktoberfest.com/" target="_blank">Hacktoberfest</a>!</p>
+        </footer>
+    </div>
+
+    <script type="module" src="src/controller/appController.js"></script>
+</body>
+</html>

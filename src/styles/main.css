@@ -1,0 +1,65 @@
+/* src/styles/main.css - Estilos Gerais e Utilitários */
+
+:root {
+    --color-primary: #ff4785; /* Cor tema Hacktoberfest */
+    --color-secondary: #586069;
+    --color-background: #f6f8fa;
+    --color-text: #24292e;
+    --color-border: #e1e4e8;
+    --color-code-bg: #f6f8fa;
+    --padding-base: 16px;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    background-color: var(--color-background);
+    color: var(--color-text);
+    line-height: 1.6;
+}
+
+.container {
+    max-width: 1000px;
+    margin: 40px auto;
+    padding: 0 var(--padding-base);
+}
+
+h1, h2 {
+    color: var(--color-primary);
+    margin-bottom: 10px;
+}
+
+h2 {
+    margin-top: 30px;
+    font-size: 1.5em;
+    border-bottom: 2px solid var(--color-border);
+    padding-bottom: 5px;
+}
+
+a {
+    color: var(--color-primary);
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+
+.header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+footer {
+    text-align: center;
+    margin: 40px 0 20px 0;
+    font-size: 0.9em;
+    color: var(--color-secondary);
+}
