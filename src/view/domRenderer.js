@@ -150,7 +150,7 @@ export const updateTestInputLabel = (categoryKey) => {
   const labels = {
     'email': 'Insira o email:',
     'cpf': 'Insira o CPF:',
-    // Adicione mais categorias aqui conforme necessário
+    'cep': 'Insira o CEP:',
   };
 
   const label = labels[categoryKey] || 'Conteúdo a Validar (Texto de Teste):';

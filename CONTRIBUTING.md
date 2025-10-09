@@ -127,7 +127,6 @@ Renderer.showToast('Mensagem', 'tipo', duração);
 ## 📋 Issues Sugeridas para Hacktoberfest
 
 ### **Iniciantes (good-first-issue):**
-- Adicionar regex para **CEP brasileiro**
 - Adicionar regex para **telefone brasileiro**  
 - Adicionar regex para **RG (Registro Geral)**
 - Melhorar mensagens de toast
@@ -296,7 +295,6 @@ Renderer.showToast('Message', 'type', duration);
 ## 📋 Suggested Issues for Hacktoberfest
 
 ### **Beginners (good-first-issue):**
-- Add regex for **Brazilian CEP**
 - Add regex for **Brazilian phone**  
 - Add regex for **RG (General Registry)**
 - Improve toast messages

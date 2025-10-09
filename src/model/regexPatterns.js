@@ -57,6 +57,31 @@ export const generateCPFRegex = (options = {}) => {
     return { pattern, flags };
 };
 
+// --- CATEGORIA 3: CEP ---
+
+/**
+ * Gera um padrão de Regex para validação de formato de CEP.
+ * @param {Object} options - Critérios de customização (ex: { allowOptionalSymbols: true })
+ * @returns {{pattern: string, flags: string}}
+ */
+export const generateCEPRegex = (options = {}) => {
+    let pattern = '';
+    let flags = '';
+
+    if (options.allowOptionalSymbols) {
+        // Permite o formato 00000-000 OU 00000000 (pontos e hífen opcionais)
+        pattern = '\\d{5}-?\\d{3}';
+    } else {
+        // Exige o formato estrito 00000-000
+        pattern = '\\d{5}-\\d{3}';
+    }
+
+    // Adicionamos as âncoras
+    pattern = `^${pattern}$`;
+
+    return { pattern, flags };
+};
+
 // --- ESTRUTURA PARA NOVAS CONTRIBUIÇÕES ---
 
 /**
@@ -76,6 +101,13 @@ export const RegexCategories = {
     'cpf': {
         name: 'CPF (Formato)',
         generator: generateCPFRegex,
+        criteria: [
+            { id: 'allowOptionalSymbols', label: 'Permitir símbolos opcionais', type: 'checkbox', default: true },
+        ]
+    },
+    'cep': {
+        name: 'CEP',
+        generator: generateCEPRegex,
         criteria: [
             { id: 'allowOptionalSymbols', label: 'Permitir símbolos opcionais', type: 'checkbox', default: true },
         ]
