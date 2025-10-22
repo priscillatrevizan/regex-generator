@@ -153,6 +153,7 @@ export const updateTestInputLabel = (categoryKey) => {
         'cep': 'Insira o CEP:',
         'uuid': 'Insira o UUID:',
         'phonebr': 'Insira o telefone:',
+        'ipv4': 'Insira o endereço IPv4:',
          // Adicione mais categorias aqui conforme necessário
     };
 

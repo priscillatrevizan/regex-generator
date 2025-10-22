@@ -150,6 +150,33 @@ export const generatePhoneBRRegex = (options = {}) => {
     return { pattern, flags };
 };
 
+// --- CATEGORIA 6: IPv4 ADDRESS ---
+
+/**
+ * Gera um padrão de Regex para validação de endereços IPv4.
+ * @returns {{pattern: string, flags: string}}
+ */
+export const generateIPv4Regex = () => {
+    // Pattern for validating each octet (0-255):
+    // 0-9: \d
+    // 10-99: [1-9]\d
+    // 100-199: 1\d{2}
+    // 200-249: 2[0-4]\d
+    // 250-255: 25[0-5]
+    const octetPattern = '(25[0-5]|2[0-4]\\d|1\\d{2}|[1-9]\\d|\\d)';
+    
+    // Full IPv4 pattern: four octets separated by dots
+    let pattern = `${octetPattern}\\.${octetPattern}\\.${octetPattern}\\.${octetPattern}`;
+    
+    // Add anchors to ensure the entire string matches
+    pattern = `^${pattern}$`;
+    
+    // No special flags needed
+    const flags = '';
+    
+    return { pattern, flags };
+};
+
 // --- ESTRUTURA PARA NOVAS CONTRIBUIÇÕES ---
 
 /**
@@ -192,6 +219,11 @@ export const RegexCategories = {
             { id: 'allowCountryCode', label: 'Permitir código do país (+55)', type: 'checkbox', default: false },
             { id: 'allowFormatting', label: 'Permitir formatação (parênteses, espaços, hífens)', type: 'checkbox', default: true },
         ]
+    },
+    'ipv4': {
+        name: 'IPv4 Address',
+        generator: generateIPv4Regex,
+        criteria: []
     }
     // NOVAS CATEGORIAS (Telefone, Senha, etc.) DEVEM SER ADICIONADAS AQUI.
 };
