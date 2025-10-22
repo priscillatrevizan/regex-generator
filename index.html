@@ -10,7 +10,7 @@
 <link rel="stylesheet" href="./dist/output.css">
 
 </head>
-<body class="bg-[#f6f8fa] text-[#24292e] font-sans">
+<body class="bg-[#f6f8fa] text-[#24292e] font-sans dark:bg-gray-800">
 
   <div class="container mx-auto my-10 px-4 max-w-5xl">
     <header class="header flex flex-col items-center text-center">
@@ -18,22 +18,27 @@
       <p id="header-subtitle" class="text-[#586069]">Escolha o tipo de validação e personalize os critérios para obter seu padrão de Expressão Regular válido.</p>
     </header>
 
-    <div class="nav-bar flex justify-between mt-4 flex-wrap gap-4">
-      <!-- Language Selector -->
-      <div class="language-selector flex items-center gap-2">
-        <label for="language-select" id="label-language">🌐 Language:</label>
-        <select id="language-select" class="px-2 py-1 border border-gray-300 rounded cursor-pointer">
-          <option value="pt">Português</option>
-          <option value="en">English</option>
-        </select>
-      </div>
+    <div class="nav-bar justify-between mt-4 flex-wrap gap-4">
+      <div class="flex justify-between">
 
-      <!-- Dark/Light Mode Toggle -->
-      <div class="theme-toggle flex items-center gap-2">
-        <label for="theme-switch" id="label-theme">🌓 Tema:</label>
-        <button id="theme-switch" class="px-3 py-1 border rounded cursor-pointer bg-white hover:bg-gray-100">Dark/Light</button>
+        <!-- Language Selector -->
+       <div class="language-selector">
+  <label for="language-select" id="label-language">🌐 Language:</label>
+  <select id="language-select">
+    <option value="pt">Português</option>
+    <option value="en">English</option>
+  </select>
+</div>
+  
+        <!-- Dark/Light Mode Toggle -->
+    <div class="theme-toggle flex items-center gap-2">
+  <button id="theme-switch">
+    <span id="theme-icon">🌙</span>
+    <span id="theme-label">Dark Mode</span>
+  </button>
+</div>
+
       </div>
-    </div>
 
     <main class="generator-app grid gap-8 mt-5 md:grid-cols-2">
       <!-- Controls Section -->
@@ -94,5 +99,7 @@
 
   <script type="module" src="src/controller/appController.js"></script>
   <script type="module" src="src/controller/languageController.js"></script>
+  <script type="module" src="src/controller/"></script>
+
 </body>
 </html>

@@ -2,6 +2,7 @@ import { RegexCategories } from '../model/regexPatterns.js';
 import * as Renderer from '../view/domRenderer.js';
 import { setupLanguageToggle } from './languageController.js';
 import { getCurrentLanguage, getCurrentLangStrings } from './languageController.js';
+import { setupThemeToggle } from './themeController.js';
 
 // ESTADO DA APLICAÇÃO (Controller)
 let state = {
@@ -119,6 +120,7 @@ const copyJsCode = () => {
  * Inicialização da aplicação.
  */
 const initialize = () => {
+  setupThemeToggle();
   Renderer.renderCategories(RegexCategories, state.selectedCategory, handleCategorySelect);
 
   Renderer.getDOMElements().generateButton.addEventListener('click', generateRegex);

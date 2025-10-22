@@ -1,11 +1,8 @@
-module.exports = {
-  content: [
-    "./index.html",
-    "./src/**/*.js",      // scans all JS files for Tailwind classes
-    "./src/**/*.html"     // scans HTML files if you have more
-  ],
+export default {
+  darkMode: "class", // required for manual toggle
+  content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
     extend: {},
   },
   plugins: [],
-}
+};
