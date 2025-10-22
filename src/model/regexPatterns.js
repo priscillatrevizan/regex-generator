@@ -104,6 +104,52 @@ export const generateUUIDRegex = () => {
     return { pattern, flags };
 };
 
+// --- CATEGORIA 5: TELEPHONE (BRAZIL) ---
+
+/**
+ * Gera um padrão de Regex para validação de números de telefone brasileiros.
+ * Suporta DDD, código do país opcional (+55), formatação opcional e padrões de celular e fixo.
+ * @param {Object} options - Critérios de customização
+ * @param {boolean} options.allowCountryCode - Permitir código do país (+55)
+ * @param {boolean} options.allowFormatting - Permitir caracteres de formatação (espaços, parênteses, hífens)
+ * @returns {{pattern: string, flags: string}}
+ */
+export const generatePhoneBRRegex = (options = {}) => {
+    const { allowCountryCode = false, allowFormatting = false } = options;
+    
+    // Prefixo do país opcional
+    const countryCodePattern = allowCountryCode ? '(\\+55\\s?)?' : '';
+    
+    // Caracteres de formatação opcionais
+    const formattingPattern = allowFormatting ? '[\\s\\(\\)-]*' : '';
+    
+    // DDD (código de área) - 2 dígitos
+    const dddPattern = allowFormatting ? 
+        `\\(?${formattingPattern}(1[1-9]|2[12478]|3[1234578]|4[1-9]|5[1345]|6[1-9]|7[134579]|8[1-9]|9[1-9])${formattingPattern}\\)?` :
+        `(1[1-9]|2[12478]|3[1234578]|4[1-9]|5[1345]|6[1-9]|7[134579]|8[1-9]|9[1-9])`;
+    
+    // Separador entre DDD e número (opcional com formatação)
+    const separatorPattern = allowFormatting ? `${formattingPattern}${formattingPattern}` : '';
+    
+    // Padrões para celular (9 dígitos) e fixo (8 dígitos)
+    // Celular: 9xxxx-xxxx (começa com 9)
+    // Fixo: xxxx-xxxx (não começa com 9)
+    const phonePattern = allowFormatting ?
+        `(${formattingPattern}9${formattingPattern}\\d{4}${formattingPattern}-${formattingPattern}\\d{4}|${formattingPattern}[1-8]${formattingPattern}\\d{3}${formattingPattern}-${formattingPattern}\\d{4})` :
+        `(9\\d{8}|[1-8]\\d{7})`;
+    
+    // Montagem do padrão completo
+    let pattern = `${countryCodePattern}${dddPattern}${separatorPattern}${phonePattern}`;
+    
+    // Adicionamos as âncoras
+    pattern = `^${pattern}$`;
+    
+    // Sem flags especiais necessárias
+    const flags = '';
+    
+    return { pattern, flags };
+};
+
 // --- ESTRUTURA PARA NOVAS CONTRIBUIÇÕES ---
 
 /**
@@ -138,6 +184,14 @@ export const RegexCategories = {
         name: 'UUID v4',
         generator: generateUUIDRegex,
         criteria: []
+    },
+    'phonebr': {
+        name: 'Telefone (BR)',
+        generator: generatePhoneBRRegex,
+        criteria: [
+            { id: 'allowCountryCode', label: 'Permitir código do país (+55)', type: 'checkbox', default: false },
+            { id: 'allowFormatting', label: 'Permitir formatação (parênteses, espaços, hífens)', type: 'checkbox', default: true },
+        ]
     }
     // NOVAS CATEGORIAS (Telefone, Senha, etc.) DEVEM SER ADICIONADAS AQUI.
 };

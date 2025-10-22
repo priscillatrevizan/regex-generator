@@ -147,19 +147,20 @@ export const setupCopyHandlers = (regexHandler, jsHandler) => {
  * @param {string} categoryKey - A chave da categoria (ex: 'email', 'cpf').
  */
 export const updateTestInputLabel = (categoryKey) => {
-  const labels = {
-    'email': 'Insira o email:',
-    'cpf': 'Insira o CPF:',
-    'cep': 'Insira o CEP:',
-    'uuid': 'Insira o UUID:',
-     // Adicione mais categorias aqui conforme necessário
-  };
+    const labels = {
+        'email': 'Insira o email:',
+        'cpf': 'Insira o CPF:',
+        'cep': 'Insira o CEP:',
+        'uuid': 'Insira o UUID:',
+        'phonebr': 'Insira o telefone:',
+         // Adicione mais categorias aqui conforme necessário
+    };
 
-  const label = labels[categoryKey] || 'Conteúdo a Validar (Texto de Teste):';
-  const labelElement = document.querySelector('label[for="test-input"]');
-  if (labelElement) {
-    labelElement.textContent = label;
-  }
+    const label = labels[categoryKey] || 'Conteúdo a Validar (Texto de Teste):';
+    const labelElement = document.querySelector('label[for="test-input"]');
+    if (labelElement) {
+        labelElement.textContent = label;
+    }
 };
 
 /**
