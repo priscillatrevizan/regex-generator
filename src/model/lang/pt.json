@@ -1,0 +1,51 @@
+{
+  "title": "Gerador de Regex",
+  "subtitle": "Ferramenta para criar expressões regulares personalizadas",
+  
+  "category_step": "Selecione a Categoria",
+  "criteria_step": "Defina os Critérios",
+  "generate_step": "Gere a Regex",
+  "result_step": "Veja o Resultado",
+  "test_step": "Teste sua Regex",
+
+  "regex_label": "Expressão Regular",
+  "js_label": "Código JavaScript",
+  "test_label": "Texto de Teste",
+  "language_label": "Idioma",
+  "theme_label": "Tema",
+  "result_label": "Resultado do Teste",
+
+  "generate_button": "Gerar Regex",
+  "copy_regex": "Copiar Regex",
+  "copy_js": "Copiar Código JS",
+  "test_button": "Testar Regex",
+
+  "placeholder_regex": "Sua regex aparecerá aqui...",
+  "placeholder_js": "O código JS aparecerá aqui...",
+  "placeholder_test_input": "Digite o texto para testar a regex...",
+  "criteria_placeholder": "Selecione uma categoria acima para ver os critérios.",
+
+  "footer_text": "Um projeto open source amigável para o <a href='https://hacktoberfest.com/' target='_blank'>Hacktoberfest</a>!",
+
+  "category_selected": "Categoria \"{category}\" selecionada. Configure os critérios e gere sua regex!",
+  "regex_generated_success": "Regex gerada com sucesso! Agora você pode copiá-la ou testá-la.",
+  "regex_copied_success": "Regex copiada para a área de transferência!",
+  "js_copied_success": "Código JavaScript copiado para a área de transferência!",
+  "regex_copy_error": "Erro ao copiar regex. Tente novamente.",
+  "js_copy_error": "Erro ao copiar código. Tente novamente.",
+
+  "test_passed": "Validação bem-sucedida! O texto corresponde ao padrão.",
+  "test_failed": "Validação falhou. Verifique o formato do texto.",
+  "regex_error": "Erro na regex: {error}",
+  "awaiting_test": "Aguardando teste...",
+
+  "test_label_email": "Insira o email:",
+  "test_label_cpf": "Insira o CPF:",
+  "test_label_cep": "Insira o CEP:",
+  "test_label_uuid": "Insira o UUID:",
+
+  "app_initialized": "Gerador de Regex inicializado. Pronto para o Hacktoberfest!",
+
+  "js_example_comment": "// Exemplo de uso:\n// regex.test('seu texto aqui');"
+
+}

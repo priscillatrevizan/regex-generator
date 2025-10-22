@@ -1,75 +1,98 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gerador de Regex | Hacktoberfest</title>
-    <link rel="stylesheet" href="src/styles/main.css">
-    <link rel="stylesheet" href="src/styles/components/generator.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gerador de Regex | Hacktoberfest</title>
+  <!-- Existing CSS -->
+  <link rel="stylesheet" href="src/styles/main.css">
+  <link rel="stylesheet" href="src/styles/components/generator.css">
+<link rel="stylesheet" href="./dist/output.css">
+
 </head>
-<body>
-    <div class="container">
-        <header class="header">
-            <h1>Gerador de Regex por Critérios</h1>
-            <p>Escolha o tipo de validação e personalize os critérios para obter seu padrão de Expressão Regular válido.</p>
-        </header>
+<body class="bg-[#f6f8fa] text-[#24292e] font-sans">
 
-        <main class="generator-app">
-            
-            <section class="generator-controls">
-                <h2>1. Escolha a Categoria</h2>
-                <div id="category-selector" class="category-selector">
-                    </div>
-                
-                <h2>2. Defina os Critérios</h2>
-                <div id="criteria-options" class="criteria-options">
-                    <p class="placeholder-text">Selecione uma categoria acima para ver os critérios.</p>
-                </div>
+  <div class="container mx-auto my-10 px-4 max-w-5xl">
+    <header class="header flex flex-col items-center text-center">
+      <h1 id="header-title" class="text-[#ff4785] text-4xl mb-2 font-bold">Gerador de Regex por Critérios</h1>
+      <p id="header-subtitle" class="text-[#586069]">Escolha o tipo de validação e personalize os critérios para obter seu padrão de Expressão Regular válido.</p>
+    </header>
 
-                <h2>3. Gere a Regex</h2>
-                <button id="generate-button" class="btn primary-btn" disabled>
-                    Gerar Regex
-                </button>
-            </section>
+    <div class="nav-bar flex justify-between mt-4 flex-wrap gap-4">
+      <!-- Language Selector -->
+      <div class="language-selector flex items-center gap-2">
+        <label for="language-select" id="label-language">🌐 Language:</label>
+        <select id="language-select" class="px-2 py-1 border border-gray-300 rounded cursor-pointer">
+          <option value="pt">Português</option>
+          <option value="en">English</option>
+        </select>
+      </div>
 
-            <section class="generator-result">
-                <h2>4. Resultado e Teste</h2>
-                
-                <div class="result-box">
-                    <label for="regex-output">Padrão Regex:</label>
-                    <textarea id="regex-output" rows="2" readonly placeholder="/.../flags"></textarea>
-                    
-                    <label for="js-code-output">Código JavaScript (para uso):</label>
-                    <textarea id="js-code-output" rows="4" readonly placeholder="const regex = new RegExp('padrao', 'flags');"></textarea>
-                    
-                    <div class="button-group">
-                        <button id="copy-regex-button" class="btn secondary-btn" disabled>Copiar Regex</button>
-                        <button id="copy-js-button" class="btn secondary-btn" disabled>Copiar Código JS</button>
-                    </div>
-                </div>
-                
-                <div class="test-viewer">
-                    <h3>5. Teste Rápido</h3>
-                    <label for="test-input">Conteúdo a Validar (Texto de Teste):</label>
-                    <textarea id="test-input" rows="3" placeholder="Insira o texto onde o regex deve ser testado..."></textarea>
-                    
-                    <button id="test-button" class="btn tertiary-btn" disabled>Testar Regex</button>
-
-                    <label for="test-result">Resultado:</label>
-                    <div id="test-result" class="test-result-output">
-                        Aguardando teste...
-                    </div>
-                </div>
-            </section>
-        </main>
-            </section>
-        </main>
-        
-        <footer class="footer">
-            <p>Um projeto open source amigável para o <a href="https://hacktoberfest.com/" target="_blank">Hacktoberfest</a>!</p>
-        </footer>
+      <!-- Dark/Light Mode Toggle -->
+      <div class="theme-toggle flex items-center gap-2">
+        <label for="theme-switch" id="label-theme">🌓 Tema:</label>
+        <button id="theme-switch" class="px-3 py-1 border rounded cursor-pointer bg-white hover:bg-gray-100">Dark/Light</button>
+      </div>
     </div>
 
-    <script type="module" src="src/controller/appController.js"></script>
+    <main class="generator-app grid gap-8 mt-5 md:grid-cols-2">
+      <!-- Controls Section -->
+      <section class="generator-controls bg-white p-5 rounded-lg shadow">
+        <h2 id="step-category" class="text-[#ff4785] text-xl border-b-2 border-gray-300 pb-1 mb-3 font-bold">1. Escolha a Categoria</h2>
+        <div id="category-selector" class="category-selector flex flex-wrap gap-2 mt-2"></div>
+
+        <h2 id="step-criteria" class="text-[#ff4785] text-xl border-b-2 border-gray-300 pb-1 mt-6 mb-3 font-bold">2. Defina os Critérios</h2>
+        <div id="criteria-options" class="criteria-options">
+          <p id="criteria-placeholder" class="placeholder-text">Selecione uma categoria acima para ver os critérios.</p>
+        </div>
+
+        <h2 id="step-generate" class="text-[#ff4785] text-xl border-b-2 border-gray-300 pb-1 mt-6 mb-3 font-bold">3. Gere a Regex</h2>
+        <button id="generate-button" class="btn primary-btn w-full py-2 px-4 rounded disabled:opacity-50 font-bold disabled:cursor-not-allowed">Gerar Regex</button>
+      </section>
+
+      <!-- Result Section -->
+      <section class="generator-result bg-white p-5 rounded-lg shadow">
+        <h2 id="step-result" class="text-[#ff4785] text-xl border-b-2 border-gray-300 pb-1 mb-3 font-bold">4. Resultado e Teste</h2>
+
+        <div class="result-box">
+          <label for="regex-output" id="label-regex" class="block font-bold mt-4 mb-1 font-bold">Padrão Regex:</label>
+          <textarea id="regex-output" rows="2" readonly class="w-full p-2 border border-gray-300 rounded font-mono bg-[#f6f8fa]" placeholder="/.../flags"></textarea>
+
+          <label for="js-code-output" id="label-js" class="block font-bold mt-4 mb-1 font-bold">Código JavaScript (para uso):</label>
+          <textarea id="js-code-output" rows="4" readonly class="w-full p-2 border border-gray-300 rounded font-mono bg-[#f6f8fa]" placeholder="const regex = new RegExp('padrao', 'flags');"></textarea>
+
+          <div class="button-group flex gap-2 mt-4">
+            <button id="copy-regex-button" class="btn secondary-btn flex-1 py-2 px-4 rounded disabled:opacity-50 disabled:cursor-not-allowed font-bold">Copiar Regex</button>
+            <button id="copy-js-button" class="btn secondary-btn flex-1 py-2 px-4 rounded disabled:opacity-50 disabled:cursor-not-allowed font-bold">Copiar Código JS</button>
+          </div>
+        </div>
+
+        <div class="test-viewer mt-6 pt-5 border-t border-gray-300">
+          <h3 id="step-test" class="text-[#586069] mb-3 font-bold">5. Teste Rápido</h3>
+
+          <label for="test-input" id="label-test" class="block mb-1">Conteúdo a Validar (Texto de Teste):</label>
+          <textarea id="test-input" rows="3" placeholder="Insira o texto onde o regex deve ser testado..." class="w-full p-2 border border-gray-300 rounded font-mono mb-3"></textarea>
+
+          <button id="test-button" class="btn tertiary-btn w-full py-2 px-4 rounded disabled:opacity-50 disabled:cursor-not-allowed">Testar Regex</button>
+
+          <label for="test-result" id="label-test-result" class="block font-bold mt-4 mb-1">Resultado:</label>
+          <div id="test-result" class="test-result-output min-h-[40px] p-2 border border-gray-300 rounded font-mono whitespace-pre-wrap text-sm bg-[#f6f8fa]">Aguardando teste...</div>
+        </div>
+      </section>
+    </main>
+
+   <footer class="mt-10 mb-5 text-center text-sm text-gray-500">
+  <p id="footer-text">
+    Um projeto open source amigável para o 
+    <a href="https://hacktoberfest.com/" target="_blank" class="text-pink-500 hover:text-pink-600 font-semibold">
+      Hacktoberfest
+    </a>!
+  </p>
+</footer>
+
+  </div>
+
+  <script type="module" src="src/controller/appController.js"></script>
+  <script type="module" src="src/controller/languageController.js"></script>
 </body>
 </html>
