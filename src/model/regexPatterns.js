@@ -101,6 +101,26 @@ export const generateSlugRegex = (options = {}) => {
 
   const flags = ''; // Não há necessidade de flags adicionais
   return { pattern, flags };
+// --- CATEGORIA 4: UUID v4 ---
+
+/**
+ * Gera um padrão de Regex para validação de UUID v4.
+ * @returns {{pattern: string, flags: string}}
+ */
+export const generateUUIDRegex = () => {
+    let pattern = '';
+    let flags = 'i'; // Case insensitive para aceitar A-F e a-f
+    
+    // UUID v4 formato: 8-4-4-4-12 caracteres hexadecimais
+    // Exemplo: 550e8400-e29b-41d4-a716-446655440000
+    const uuidPattern = '[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}';
+    
+    pattern = uuidPattern;
+    
+    // Adicionamos as âncoras
+    pattern = `^${pattern}$`;
+    
+    return { pattern, flags };
 };
 
 // --- ESTRUTURA PARA NOVAS CONTRIBUIÇÕES ---
