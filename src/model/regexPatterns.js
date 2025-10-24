@@ -82,6 +82,25 @@ export const generateCEPRegex = (options = {}) => {
     return { pattern, flags };
 };
 
+/**
+ * Gera um padrão de Regex para validação de Slug (URL-friendly string).
+ * @param {Object} options - Critérios de customização (ex: { allowUppercase: false })
+ * @returns {{pattern: string, flags: string}}
+ */
+export const generateSlugRegex = (options = {}) => {
+  const { allowUppercase = false } = options;
+  let pattern = '';
+
+  if (allowUppercase) {
+    // Permite letras maiúsculas, minúsculas, números e hífens únicos
+    pattern = '^[A-Za-z0-9]+(?:-[A-Za-z0-9]+)*$';
+  } else {
+    // Apenas letras minúsculas, números e hífens únicos
+    pattern = '^[a-z0-9]+(?:-[a-z0-9]+)*$';
+  }
+
+  const flags = ''; // Não há necessidade de flags adicionais
+  return { pattern, flags };
 // --- CATEGORIA 4: UUID v4 ---
 
 /**
@@ -134,10 +153,12 @@ export const RegexCategories = {
             { id: 'allowOptionalSymbols', label: 'Permitir símbolos opcionais', type: 'checkbox', default: true },
         ]
     },
-    'uuid': {
-        name: 'UUID v4',
-        generator: generateUUIDRegex,
-        criteria: []
+    'slug': {
+        name: 'Slug (URL-friendly)',
+        generator: generateSlugRegex,
+        criteria: [
+            { id: 'allowUppercase', label: 'Permitir letras maiúsculas (A-Z)', type: 'checkbox', default: false },
+        ]
     }
     // NOVAS CATEGORIAS (Telefone, Senha, etc.) DEVEM SER ADICIONADAS AQUI.
 };

@@ -151,7 +151,7 @@ export const updateTestInputLabel = (categoryKey) => {
     'email': 'Insira o email:',
     'cpf': 'Insira o CPF:',
     'cep': 'Insira o CEP:',
-    'uuid': 'Insira o UUID:',
+    'slug': 'Insira o slug (URL-friendly):',
      // Adicione mais categorias aqui conforme necessário
   };
 
