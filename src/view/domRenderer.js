@@ -169,6 +169,14 @@ export const updateTestInputLabel = (categoryKey) => {
     cpf: strings.test_label_cpf,
     cep: strings.test_label_cep,
     uuid: strings.test_label_uuid,
+  const labels = {
+    'email': 'Insira o email:',
+    'cpf': 'Insira o CPF:',
+    'cep': 'Insira o CEP:',
+    'uuid': 'Insira o UUID:',
+    'slug': 'Insira o slug (URL-friendly):',
+
+     // Adicione mais categorias aqui conforme necessário
   };
 
   const label = labelMap[categoryKey] || strings.test_label;
