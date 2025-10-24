@@ -125,6 +125,7 @@ export const generateSlugRegex = (options = {}) => {
 
   const flags = ''; // Não há necessidade de flags adicionais
   return { pattern, flags };
+};
 
 // --- ESTRUTURA PARA NOVAS CONTRIBUIÇÕES ---
 
@@ -135,106 +136,57 @@ export const generateSlugRegex = (options = {}) => {
  */
 export const RegexCategories = {
   email: {
-   name: {
-  pt: "E-mail",
-  en: "Email"
-}
-,
+    name: { pt: "E-mail", en: "Email" },
     generator: generateEmailRegex,
-    // Definição dos critérios para o Controller renderizar a View:
     criteria: [
       {
         id: "allowSubdomains",
-        labels: {
-                    pt: 'Permitir subdomínios (.ex: ".com" , ".com.br")',
-                    en: 'Allow subdomains (ex: ".com", ".com.br")'
-                },
+        labels: { pt: 'Permitir subdomínios (.ex: ".com" , ".com.br")', en: 'Allow subdomains (ex: ".com", ".com.br")' },
         type: "checkbox",
         default: false,
       },
     ],
   },
   cpf: {
-    name: {
-    pt: "CPF (Formato)",
-    en: "CPF (Format)"
-  },
+    name: { pt: "CPF (Formato)", en: "CPF (Format)" },
     generator: generateCPFRegex,
     criteria: [
       {
         id: "allowOptionalSymbols",
-        labels: {
-                    pt: 'Permitir símbolos opcionais',
-                    en: 'Allow optional symbols'
-                },
+        labels: { pt: 'Permitir símbolos opcionais', en: 'Allow optional symbols' },
         type: "checkbox",
         default: true,
       },
     ],
   },
   cep: {
-    name: {
-  pt: "CEP",
-  en: "CEP"
-},
-
+    name: { pt: "CEP", en: "CEP" },
     generator: generateCEPRegex,
     criteria: [
       {
         id: "allowOptionalSymbols",
-        labels: {
-                    pt: 'Permitir símbolos opcionais',
-                    en: 'Allow optional symbols'
-                },
+        labels: { pt: 'Permitir símbolos opcionais', en: 'Allow optional symbols' },
         type: "checkbox",
         default: true,
       },
     ],
   },
   uuid: {
-    name: {
-  pt: "UUID v4",
-  en: "UUID v4"
-},
-
+    name: { pt: "UUID v4", en: "UUID v4" },
     generator: generateUUIDRegex,
     criteria: [],
   },
-  // NOVAS CATEGORIAS (Telefone, Senha, etc.) DEVEM SER ADICIONADAS AQUI.
-};
-    'email': {
-        name: 'E-mail',
-        generator: generateEmailRegex,
-        // Definição dos critérios para o Controller renderizar a View:
-        criteria: [
-            { id: 'allowSubdomains', label: 'Permitir subdomínios (.ex: ".com" , ".com.br")', type: 'checkbox', default: false },
-        ]
-    },
-    'cpf': {
-        name: 'CPF (Formato)',
-        generator: generateCPFRegex,
-        criteria: [
-            { id: 'allowOptionalSymbols', label: 'Permitir símbolos opcionais', type: 'checkbox', default: true },
-        ]
-    },
-    'cep': {
-        name: 'CEP',
-        generator: generateCEPRegex,
-        criteria: [
-            { id: 'allowOptionalSymbols', label: 'Permitir símbolos opcionais', type: 'checkbox', default: true },
-        ]
-    },
-      'uuid': {
-        name: 'UUID v4',
-        generator: generateUUIDRegex,
-        criteria: []
+  slug: {
+    name: { pt: "Slug (URL-friendly)", en: "Slug (URL-friendly)" },
+    generator: generateSlugRegex,
+    criteria: [
+      {
+        id: 'allowUppercase',
+        labels: { pt: 'Permitir letras maiúsculas (A-Z)', en: 'Allow uppercase letters (A-Z)' },
+        type: 'checkbox',
+        default: false,
       },
-    'slug': {
-        name: 'Slug (URL-friendly)',
-        generator: generateSlugRegex,
-        criteria: [
-            { id: 'allowUppercase', label: 'Permitir letras maiúsculas (A-Z)', type: 'checkbox', default: false },
-        ]
-    }
-    // NOVAS CATEGORIAS (Telefone, Senha, etc.) DEVEM SER ADICIONADAS AQUI.
+    ],
+  },
+  // NOVAS CATEGORIAS (Telefone, Senha, etc.) DEVEM SER ADICIONADAS AQUI.
 };

@@ -1,5 +1,4 @@
-import { getCurrentLanguage } from "../controller/languageController.js"; // make sure this import exists
-import { getCurrentLangStrings } from '../controller/languageController.js';
+import { getCurrentLangStrings, getCurrentLanguage } from "../controller/languageController.js"; // make sure this import exists
 
 const DOMElements = {
   categorySelector: document.getElementById("category-selector"),
@@ -163,23 +162,24 @@ export const setupCopyHandlers = (regexHandler, jsHandler) => {
  */
 export const updateTestInputLabel = (categoryKey) => {
   const strings = getCurrentLangStrings();
-
+  // Prefer strings from language files, fallback to sensible Portuguese text
   const labelMap = {
     email: strings.test_label_email,
     cpf: strings.test_label_cpf,
     cep: strings.test_label_cep,
     uuid: strings.test_label_uuid,
-  const labels = {
-    'email': 'Insira o email:',
-    'cpf': 'Insira o CPF:',
-    'cep': 'Insira o CEP:',
-    'uuid': 'Insira o UUID:',
-    'slug': 'Insira o slug (URL-friendly):',
-
-     // Adicione mais categorias aqui conforme necessário
+    slug: strings.test_label_slug,
   };
 
-  const label = labelMap[categoryKey] || strings.test_label;
+  const fallbackLabels = {
+    email: 'Insira o email:',
+    cpf: 'Insira o CPF:',
+    cep: 'Insira o CEP:',
+    uuid: 'Insira o UUID:',
+    slug: 'Insira o slug (URL-friendly):',
+  };
+
+  const label = labelMap[categoryKey] || fallbackLabels[categoryKey] || strings.test_label || 'Insira o texto a ser testado:';
   const labelElement = document.querySelector('label[for="test-input"]');
 
   if (labelElement) {
