@@ -140,8 +140,6 @@ export const setupCopyHandlers = (regexHandler, jsHandler) => {
   DOMElements.copyJsButton.addEventListener('click', jsHandler);
 };
 
-
-
 /**
  * Atualiza o label do campo de teste baseado na categoria selecionada.
  * @param {string} categoryKey - A chave da categoria (ex: 'email', 'cpf').
@@ -151,7 +149,9 @@ export const updateTestInputLabel = (categoryKey) => {
     'email': 'Insira o email:',
     'cpf': 'Insira o CPF:',
     'cep': 'Insira o CEP:',
+    'uuid': 'Insira o UUID:',
     'slug': 'Insira o slug (URL-friendly):',
+
      // Adicione mais categorias aqui conforme necessário
   };
 
