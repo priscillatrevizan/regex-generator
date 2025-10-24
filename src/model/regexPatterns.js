@@ -124,6 +124,34 @@ export const generateSlugRegex = (options = {}) => {
 
   const flags = ''; // Não há necessidade de flags adicionais
   return { pattern, flags };
+  
+  
+// --- CATEGORIA 6: IPv4 ---
+
+/**
+ * Gera um padrão de Regex para validação de endereços IPv4.
+ * @param {Object} options - Critérios de customização (ex: { allowCIDR: true })
+ * @returns {{pattern: string, flags: string}}
+ */
+export const generateIPv4Regex = (options = {}) => {
+    // Octet: 0-255 => (25[0-5]|2[0-4]\d|1\d{2}|[1-9]?\d)
+    const octet = '(?:25[0-5]|2[0-4]\\d|1\\d{2}|[1-9]?\\d)';
+
+    // Quatro octets separados por ponto
+    let pattern = `${octet}\\.${octet}\\.${octet}\\.${octet}`;
+
+    // Se permitido, aceitar sufixo CIDR (ex: /24) com prefixo 0-32
+    if (options.allowCIDR) {
+        pattern = `${pattern}(?:\/(?:[0-9]|[12][0-9]|3[0-2]))?`;
+    }
+
+    // Adicionamos as âncoras para validação completa
+    pattern = `^${pattern}$`;
+
+    const flags = '';
+
+    return { pattern, flags };
+};
 
 // --- ESTRUTURA PARA NOVAS CONTRIBUIÇÕES ---
 
@@ -165,6 +193,14 @@ export const RegexCategories = {
         generator: generateSlugRegex,
         criteria: [
             { id: 'allowUppercase', label: 'Permitir letras maiúsculas (A-Z)', type: 'checkbox', default: false },
+        ]
+    }
+    ,
+    'ipv4': {
+        name: 'IPv4 (Endereço)',
+        generator: generateIPv4Regex,
+        criteria: [
+            { id: 'allowCIDR', label: 'Permitir sufixo CIDR (ex: /24)', type: 'checkbox', default: false },
         ]
     }
     // NOVAS CATEGORIAS (Telefone, Senha, etc.) DEVEM SER ADICIONADAS AQUI.
