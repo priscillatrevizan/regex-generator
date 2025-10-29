@@ -24,6 +24,15 @@ export const renderCategories = (categories, activeCategory, handler) => {
 
   const lang = getCurrentLanguage(); // get current language code (e.g., 'pt' or 'en')
 
+  // Log keys to help debug missing categories in the UI
+  // (Will appear in browser console when the app initializes)
+  try {
+    // eslint-disable-next-line no-console
+    console.log('Rendering categories:', Object.keys(categories));
+    console.log('Full categories object passed to renderCategories:', categories);
+  } catch (e) {
+    // ignore in environments without console
+  }
   Object.keys(categories).forEach((key) => {
     const categoryData = categories[key];
     const button = document.createElement("button");
@@ -35,7 +44,11 @@ export const renderCategories = (categories, activeCategory, handler) => {
         : categoryData.name;
 
     button.dataset.category = key;
+    // Add both a semantic category class and the generic .btn for consistent styling
     button.classList.add("btn-category");
+    button.classList.add("btn");
+    // Also add a modifier so CSS can target category buttons if needed
+    button.classList.add("btn-category--small");
 
     if (key === activeCategory) {
       button.classList.add("active");
@@ -169,6 +182,8 @@ export const updateTestInputLabel = (categoryKey) => {
     cep: strings.test_label_cep,
     uuid: strings.test_label_uuid,
     slug: strings.test_label_slug,
+    ipv4: strings.test_label_ipv4,
+    phonebr: strings.test_label_phonebr,
   };
 
   const fallbackLabels = {
@@ -177,6 +192,8 @@ export const updateTestInputLabel = (categoryKey) => {
     cep: 'Insira o CEP:',
     uuid: 'Insira o UUID:',
     slug: 'Insira o slug (URL-friendly):',
+    ipv4: 'Insira o IPv4:',
+    phonebr: 'Insira o telefone (BR):',
   };
 
   const label = labelMap[categoryKey] || fallbackLabels[categoryKey] || strings.test_label || 'Insira o texto a ser testado:';
