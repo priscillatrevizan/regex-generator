@@ -1,7 +1,8 @@
-// src/controller/appController.js
-
 import { RegexCategories } from '../model/regexPatterns.js';
 import * as Renderer from '../view/domRenderer.js';
+import { setupLanguageToggle } from './languageController.js';
+import { getCurrentLanguage, getCurrentLangStrings } from './languageController.js';
+import { setupThemeToggle } from './themeController.js';
 
 // ESTADO DA APLICAÇÃO (Controller)
 let state = {
@@ -14,210 +15,184 @@ let state = {
  * @param {string} categoryKey - A chave da categoria (ex: 'email').
  */
 const handleCategorySelect = (categoryKey) => {
+  const strings = getCurrentLangStrings();
   const category = RegexCategories[categoryKey];
-
   if (!category) return;
 
   state.selectedCategory = categoryKey;
-  state.criteriaOptions = {}; // Resetar opções ao mudar de categoria
+  state.criteriaOptions = {};
 
-  // 1. Inicializa o estado das opções com os valores padrão do Model
+  // Inicializa o estado das opções com os valores padrão do Model
   category.criteria.forEach(item => {
     state.criteriaOptions[item.id] = item.default;
   });
 
-  // 2. Renderiza novamente a lista de categorias (para destacar a ativa)
+  // Renderiza a lista de categorias
   Renderer.renderCategories(RegexCategories, categoryKey, handleCategorySelect);
 
-  // 3. Renderiza os critérios da categoria (usa a função do Model para injetar no DOM)
-  Renderer.renderCriteria(category.criteria, handleCriteriaChange);
+  // Renderiza os critérios da categoria
+  Renderer.renderCriteria(category.criteria, handleCriteriaChange, getCurrentLanguage(), strings.criteria_placeholder);
 
-  // 4. Habilita o botão de geração e desabilita os botões subsequentes
+  // Habilita e desabilita botões
   Renderer.enableGenerateButton(true);
   Renderer.enableCopyButtons(false);
   Renderer.enableTestButton(false);
 
-  // 5. Limpa a saída
+  // Limpa saída e campo de teste
   Renderer.updateOutput('', '');
+  Renderer.getDOMElements().testInput.value = '';
+  Renderer.updateTestResult(strings.test_result, undefined);
 
-  // 6. Atualiza o label do campo de teste
+  // Atualiza label do campo de teste
   Renderer.updateTestInputLabel(categoryKey);
 
-  // 7. Limpa o campo de teste e resultado quando muda de categoria
-  Renderer.getDOMElements().testInput.value = '';
-  Renderer.updateTestResult('Aguardando teste...', undefined);
+  // Toast de categoria selecionada
+// Get current language code
+const currentLang = getCurrentLanguage();
 
-  // 8. Mostra toast informativo sobre a categoria selecionada
-  const categoryName = RegexCategories[categoryKey].name;
-  Renderer.showToast(`Categoria "${categoryName}" selecionada. Configure os critérios e gere sua regex!`, 'info', 2500);
+// Extract the category name string based on current language, fallback to Portuguese
+const categoryName = RegexCategories[categoryKey].name[currentLang] || RegexCategories[categoryKey].name.pt;
+
+// Show the toast with the correct string
+Renderer.showToast(
+  strings.category_selected?.replace('{category}', categoryName) ||
+  `Categoria "${categoryName}" selecionada. Configure os critérios e gere sua regex!`,
+  'info',
+  2500
+);
+
 };
 
-
 /**
- * Manipulador de evento: Chamado quando um critério (checkbox/radio) muda.
- * @param {string} id - O ID do critério (ex: 'allowSubdomains').
- * @param {boolean} value - O novo valor (true/false).
+ * Manipulador de evento: Chamado quando um critério muda.
  */
 const handleCriteriaChange = (id, value) => {
   state.criteriaOptions[id] = value;
-  // Opcional: Gerar automaticamente ao mudar o critério, se for desejado.
-  // generateRegex(); 
 };
 
-
 /**
- * A função principal: Chama o Model e atualiza a View.
+ * Geração de Regex.
  */
 const generateRegex = () => {
+  const strings = getCurrentLangStrings();
   const key = state.selectedCategory;
   const category = RegexCategories[key];
-
   if (!category) return;
 
-  // 1. CHAMADA AO MODEL: Passa as opções de estado para a função de geração pura.
   const { pattern, flags } = category.generator(state.criteriaOptions);
 
-  // 2. ATUALIZAÇÃO DA VIEW: Exibe o resultado.
   Renderer.updateOutput(pattern, flags);
-
-  // 3. Habilita os botões de cópia após a geração
   Renderer.enableCopyButtons(true);
-
-  // 4. Mantém o botão de teste desabilitado até que a regex seja copiada ou o usuário clique em testar
   Renderer.enableTestButton(true);
 
-  // 5. Mostra toast de sucesso
-  Renderer.showToast('Regex gerada com sucesso! Agora você pode copiá-la ou testá-la.', 'success');
+  Renderer.showToast(strings.regex_generated_success, 'success');
 };
 
 /**
- * Manipulador de evento: Copia o conteúdo da área de Regex.
+ * Copiar Regex para clipboard.
  */
 const copyRegex = () => {
+  const strings = getCurrentLangStrings();
   const outputElement = Renderer.getDOMElements().regexOutput;
+
   if (outputElement.value) {
     navigator.clipboard.writeText(outputElement.value)
-      .then(() => {
-        Renderer.showToast('Regex copiada para a área de transferência!', 'success');
-      })
-      .catch(err => {
-        console.error('Falha ao copiar:', err);
-        Renderer.showToast('Erro ao copiar regex. Tente novamente.', 'error');
-      });
+      .then(() => Renderer.showToast(strings.regex_copy_success, 'success'))
+      .catch(() => Renderer.showToast(strings.regex_copy_error, 'error'));
   }
 };
 
 /**
- * Manipulador de evento: Copia o código JavaScript.
+ * Copiar JS para clipboard.
  */
 const copyJsCode = () => {
+  const strings = getCurrentLangStrings();
   const jsOutputElement = Renderer.getDOMElements().jsCodeOutput;
+
   if (jsOutputElement.value) {
     navigator.clipboard.writeText(jsOutputElement.value)
-      .then(() => {
-        Renderer.showToast('Código JavaScript copiado para a área de transferência!', 'success');
-      })
-      .catch(err => {
-        console.error('Falha ao copiar:', err);
-        Renderer.showToast('Erro ao copiar código. Tente novamente.', 'error');
-      });
+      .then(() => Renderer.showToast(strings.js_copy_success, 'success'))
+      .catch(() => Renderer.showToast(strings.js_copy_error, 'error'));
   }
 };
 
-
 /**
- * Inicialização da aplicação (chamado ao carregar o script no index.html).
+ * Inicialização da aplicação.
  */
 const initialize = () => {
-  // 1. Renderiza as categorias iniciais (não há categoria ativa)
+  setupThemeToggle();
   Renderer.renderCategories(RegexCategories, state.selectedCategory, handleCategorySelect);
 
-  // 2. Configura o Listener do botão de Geração
   Renderer.getDOMElements().generateButton.addEventListener('click', generateRegex);
-
-  // 3. Configura o Listener do botão de Teste
   Renderer.setupTestHandler(runTest);
-
-  // 4. Configura os Listeners dos botões de Copiar
   Renderer.setupCopyHandlers(copyRegex, copyJsCode);
 
-  // 5. Inicializa todos os botões como desabilitados (exceto seleção de categoria)
   Renderer.enableGenerateButton(false);
   Renderer.enableCopyButtons(false);
   Renderer.enableTestButton(false);
 
-  console.log("Gerador de Regex inicializado. Pronto para o Hacktoberfest!");
-  
+  setupLanguageToggle();
+
+  const strings = getCurrentLangStrings();
+console.log(strings.app_initialized || "Regex Generator initialized. Ready for Hacktoberfest!");
+
+
   // Toast de boas-vindas
   setTimeout(() => {
-    Renderer.showToast('Bem-vindo ao Gerador de Regex! Selecione uma categoria para começar.', 'info', 4000);
+    const strings = getCurrentLangStrings();
+    Renderer.showToast(strings.welcome_message, 'info', 4000);
   }, 500);
 };
 
-// Inicia a aplicação quando o DOM estiver completamente carregado
 document.addEventListener('DOMContentLoaded', initialize);
 
-
 /**
- * Executa o teste de Regex e atualiza a View de resultado.
+ * Executa o teste de Regex.
  */
 const runTest = () => {
+  const strings = getCurrentLangStrings();
   const outputRegex = Renderer.getDOMElements().regexOutput.value;
   const testText = Renderer.getDOMElements().testInput.value;
 
   if (!outputRegex || !testText) {
-    Renderer.updateTestResult('Insira um padrão de Regex e um texto para validar.', false);
+    Renderer.updateTestResult(strings.test_missing_input, false);
     return;
   }
 
   try {
-    // Extrai o padrão e as flags do formato /padrao/flags
     const match = outputRegex.match(/^\/(.+)\/([igm]{0,3})$/);
     if (!match) {
-      Renderer.updateTestResult('Erro: Formato de Regex inválido.', false);
+      Renderer.updateTestResult(strings.test_invalid_format, false);
       return;
     }
 
     const pattern = match[1];
     const flags = match[2];
-
-    // Cria o objeto RegExp
     const regex = new RegExp(pattern, flags);
-
-    // Executa o teste
     const isMatch = regex.test(testText);
-    let resultMessage = `A validação ${isMatch ? 'PASSOU' : 'FALHOU'}.`;
+
+    let resultMessage = isMatch ? strings.validation_passed : strings.validation_failed;
 
     if (isMatch) {
-      // Se tiver a flag 'g' (global), extraímos todos os matches
       if (flags.includes('g')) {
         const matches = [...testText.matchAll(regex)].map(m => m[0]);
-        resultMessage += `\n\nMatches encontrados:\n${matches.join('\n')}`;
+        resultMessage += `\n\n${strings.matches_found}:\n${matches.join('\n')}`;
       } else {
-        // Sem a flag 'g', apenas testamos a presença (ou o primeiro match)
         const firstMatch = testText.match(regex);
-        if (firstMatch) {
-          resultMessage += `\n\nPrimeiro Match: ${firstMatch[0]}`;
-        }
+        if (firstMatch) resultMessage += `\n\n${strings.first_match}: ${firstMatch[0]}`;
       }
     }
 
-    // Atualiza o mini visor de teste
     Renderer.updateTestResult(resultMessage, isMatch);
 
-    // Adiciona uma dica sobre o próximo passo
     if (isMatch) {
-      resultMessage += '\n\n✅ Teste concluído! Você pode testar outros valores ou gerar uma nova regex.';
-      Renderer.showToast('Validação bem-sucedida! O texto corresponde ao padrão.', 'success');
+      Renderer.showToast(strings.test_success, 'success');
     } else {
-      resultMessage += '\n\n❌ Teste falhou. Verifique se o texto está no formato esperado ou ajuste os critérios.';
-      Renderer.showToast('Validação falhou. Verifique o formato do texto.', 'warning');
+      Renderer.showToast(strings.test_failure, 'warning');
     }
-    
-    Renderer.updateTestResult(resultMessage, isMatch);
 
   } catch (e) {
-    Renderer.updateTestResult(`Erro de Regex: ${e.message}`, false);
-    Renderer.showToast(`Erro na regex: ${e.message}`, 'error');
+    Renderer.updateTestResult(`${strings.test_error}: ${e.message}`, false);
+    Renderer.showToast(`${strings.test_error}: ${e.message}`, 'error');
   }
 };
