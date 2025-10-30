@@ -262,3 +262,4 @@ export const showToast = (message, type = "info", duration = 3000) => {
 };
 
 export const getDOMElements = () => DOMElements;
+
