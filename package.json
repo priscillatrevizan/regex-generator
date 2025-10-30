@@ -5,7 +5,7 @@
   "main": "src/controller/appController.js",
   "scripts": {
     "start": "http-server .",
-    "test": "jest",
+    "test": "echo \"Error: no test specified\" && exit 1",
     "test:unit": "node tests/run-tests.js"
   },
   "keywords": [
@@ -20,13 +20,13 @@
   "license": "MIT",
   "devDependencies": {
     "@types/jest": "^30.0.0",
+    "autoprefixer": "^10.4.21",
     "http-server": "^14.1.1",
     "jest": "^30.2.0",
-    "ts-jest": "^29.4.5",
-    "typescript": "^5.9.3",
-    "autoprefixer": "^10.4.21",
     "postcss": "^8.5.6",
-    "tailwindcss": "^4.1.15"
+    "tailwindcss": "^4.1.15",
+    "ts-jest": "^29.4.5",
+    "typescript": "^5.9.3"
   },
   "dependencies": {
     "@tailwindcss/cli": "^4.1.15",

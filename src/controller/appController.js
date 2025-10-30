@@ -1,7 +1,6 @@
-import { RegexCategories } from '../model/regexPatterns.js';
+import { RegexCategories } from '../model/regexPatterns.js?v=1.1';
 import * as Renderer from '../view/domRenderer.js';
-import { setupLanguageToggle } from './languageController.js';
-import { getCurrentLanguage, getCurrentLangStrings } from './languageController.js';
+import { getCurrentLangStrings, getCurrentLanguage, setupLanguageToggle } from './languageController.js';
 import { setupThemeToggle } from './themeController.js';
 
 // ESTADO DA APLICAÇÃO (Controller)
@@ -121,6 +120,16 @@ const copyJsCode = () => {
  */
 const initialize = () => {
   setupThemeToggle();
+  // Debug: log the keys exported by the Model to ensure RegexCategories is available at runtime
+  try {
+    // eslint-disable-next-line no-console
+    console.log('RegexCategories keys in controller:', Object.keys(RegexCategories || {}));
+    console.log('Full RegexCategories object in controller:', RegexCategories);
+  } catch (e) {
+    // eslint-disable-next-line no-console
+    console.error('Error reading RegexCategories keys:', e && e.message ? e.message : e);
+  }
+
   Renderer.renderCategories(RegexCategories, state.selectedCategory, handleCategorySelect);
 
   Renderer.getDOMElements().generateButton.addEventListener('click', generateRegex);

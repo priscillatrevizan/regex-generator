@@ -58,6 +58,7 @@
   "test_label_cpf": "Insira o CPF:",
   "test_label_cep": "Insira o CEP:",
   "test_label_uuid": "Insira o UUID:",
+  "test_label_phonebr": "Insira o telefone (BR):",
 
   "app_initialized": "Gerador de Regex inicializado. Pronto para o Hacktoberfest!",
 
