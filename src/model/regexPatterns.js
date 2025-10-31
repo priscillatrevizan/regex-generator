@@ -200,6 +200,55 @@ export const generatePhoneBRRegex = (options = {}) => {
     return { pattern, flags };
 };
 
+// --- CATEGORIA 8: DATE (DD/MM/YYYY) ---
+
+/**
+ * Gera um padrão de Regex para validação de data no formato DD/MM/YYYY.
+ * @param {Object} options - Critérios de customização
+ * @param {boolean} options.allowDash - Permitir "-" como separador
+ * @param {boolean} options.allowNoSeparator - Permitir data sem separador ex: DDMMYYYY
+ * @returns {{pattern: string, flags: string}}
+ */
+
+export const generateDateBRRegex = (options = {}) => {
+  const { allowDash = false, allowNoSeparator = false } = options;
+
+  // Dia: 01–31
+  const day = "(0[1-9]|[12][0-9]|3[01])";
+
+  // Mês: 01–12
+  const month = "(0[1-9]|1[0-2])";
+
+  // Ano: 4 dígitos
+  const year = "(\\d{4})";
+
+  // Default: DD/MM/YYYY
+  let separator = "\\/";
+
+  // If allowDash => allow "/" or "-"
+  if (allowDash) {
+    separator = "[\\/-]";
+  }
+
+  // Main pattern
+  let pattern = `${day}${separator}${month}${separator}${year}`;
+
+  // Optionally support DDMMYYYY (no separators)
+  if (allowNoSeparator) {
+    pattern = `(${pattern}|${day}${month}${year})`;
+  }
+
+  pattern = `^${pattern}$`;
+
+  return { pattern, flags: "" };
+};
+
+
+
+
+
+
+
 // --- ESTRUTURA PARA NOVAS CONTRIBUIÇÕES ---
 
 /**
@@ -287,6 +336,24 @@ export const RegexCategories = {
         id: 'allowCIDR',
         labels: { pt: 'Permitir sufixo CIDR (ex: /24)', en: 'Allow CIDR suffix (e.g. /24)' },
         type: 'checkbox',
+        default: false,
+      },
+    ],
+  },
+  datebr: {
+    name: { pt: "Data (DD/MM/YYYY)", en: "Date (DD/MM/YYYY)" },
+    generator: generateDateBRRegex,
+    criteria: [
+      {
+        id: "allowDash",
+        labels: { pt: 'Permitir hífen (ex: 31-12-2025)', en: 'Allow dash (ex: 31-12-2025)' },
+        type: "checkbox",
+        default: false,
+      },
+      {
+        id: "allowNoSeparator",
+        labels: { pt: 'Permitir sem separador (ex: 31122025)', en: 'Allow no separator (ex: 31122025)' },
+        type: "checkbox",
         default: false,
       },
     ],
